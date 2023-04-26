@@ -1,7 +1,7 @@
 #  Whipper Snapper
 Talk directly to your data
 
-<img src="https://github.com/Rock-River-Research/whippersnapper/blob/main/docs/images/panda_friends.png" width="300px" style="display: block; margin: 0 auto">
+<img src="https://github.com/Rock-River-Research/whippersnapper/blob/main/docs/images/panda_friends.png" width="600px" style="display: block; margin: 0 auto">
 
 -------
 
