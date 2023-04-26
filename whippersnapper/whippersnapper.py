@@ -5,7 +5,7 @@ import pandas as pd
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 
-from prompts import *
+from .prompts import *
 
 
 QUERY_FAILED = '<query_failed>'
