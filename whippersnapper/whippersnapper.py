@@ -79,6 +79,7 @@ def answer_question(question, path_to_db, table_name):
     df_samples = query_database(path_to_db, 'SELECT * FROM {table_name} LIMIT 3;')
     samples = str([tuple(df_samples.columns.tolist())] + [row[1:] for row in df_samples.to_records().tolist()])
     
+    # generate the initial query
     sql_query = sql_generator.run({
         'question': question, 
         'columns': schema, 
@@ -86,8 +87,10 @@ def answer_question(question, path_to_db, table_name):
         'table_name': table_name
     })
 
+    # run the query against the database
     db_response = query_database(path_to_db, sql_query)
 
+    # fix the query if necessary
     if str(db_response) == QUERY_FAILED:
         answer_raw = sql_rewriter.run({
             'question': question, 
@@ -102,6 +105,7 @@ def answer_question(question, path_to_db, table_name):
     else:
         answer = db_response
         
+    # generate a summary of the result and the methodology
     summarized_response = summarizer.run({
         'question': question, 
         'query': sql_query, 
