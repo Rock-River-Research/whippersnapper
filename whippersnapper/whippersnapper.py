@@ -36,7 +36,7 @@ def query_database(db_path, query, max_rows=20):
             return pd.DataFrame(rows, columns=columns)
     
     except:
-        return '<query_failed>'
+        return QUERY_FAILED
     
     
 def get_schema(db_path, table_name):
@@ -76,7 +76,7 @@ summarizer = LLMChain(
 def answer_question(question, path_to_db, table_name):
 
     schema = str(get_schema(path_to_db, 'steam_games'))
-    df_samples = query_database(path_to_db, 'SELECT * FROM steam_games LIMIT 3;')
+    df_samples = query_database(path_to_db, 'SELECT * FROM {table_name} LIMIT 3;')
     samples = str([tuple(df_samples.columns.tolist())] + [row[1:] for row in df_samples.to_records().tolist()])
     
     sql_query = sql_generator.run({
