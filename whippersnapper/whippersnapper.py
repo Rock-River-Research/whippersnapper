@@ -75,7 +75,7 @@ summarizer = LLMChain(
 
 def answer_question(question, path_to_db, table_name):
 
-    schema = str(get_schema(path_to_db, 'steam_games'))
+    schema = str(get_schema(path_to_db, table_name))
     df_samples = query_database(path_to_db, 'SELECT * FROM {table_name} LIMIT 3;')
     samples = str([tuple(df_samples.columns.tolist())] + [row[1:] for row in df_samples.to_records().tolist()])
     
